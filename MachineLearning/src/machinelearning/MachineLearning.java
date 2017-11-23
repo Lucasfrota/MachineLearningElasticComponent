@@ -17,6 +17,10 @@ public class MachineLearning {
         
         System.out.println("Class: " + nameClass);
         
+        Serializer<ClassifierInterface> serializer = new Serializer<ClassifierInterface>();
+        
+        serializer.SerializeObject(cI, "object");
+        
     }
     
 }
