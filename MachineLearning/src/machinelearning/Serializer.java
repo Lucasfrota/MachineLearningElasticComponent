@@ -1,18 +1,16 @@
 package machinelearning;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class Serializer<T>{
     
-    private String objName;
-    
     public void SerializeObject(T obj, String objName){
         
-        this.objName = objName;
-        
         try{
-            FileOutputStream out = new FileOutputStream(this.objName);
+            FileOutputStream out = new FileOutputStream(objName);
             ObjectOutputStream object = new ObjectOutputStream(out);
             
             object.writeObject(obj);
@@ -24,4 +22,22 @@ public class Serializer<T>{
         }
     }
     
+    public T DeserializeObject(String objName){
+        T obj = null;
+        
+        try{
+        
+            FileInputStream out = new FileInputStream(objName);
+            ObjectInputStream object = new ObjectInputStream(out);
+
+            obj = (T) object.readObject();
+            object.close();
+            out.close();
+
+        }catch(Exception e){
+            
+        }
+        
+        return obj;
+    }
 }

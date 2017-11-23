@@ -21,6 +21,10 @@ public class MachineLearning {
         
         serializer.SerializeObject(cI, "object");
         
+        ClassifierInterface c = serializer.DeserializeObject("object");
+        
+        System.out.println(c.classifier(40,"1","1","2","1","2","2","2","1","2","2","2","2",0.60f,62,166,4.0f,63,"1"));
+        
     }
     
 }
