@@ -1,6 +1,8 @@
 package machinelearning;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.bayes.NaiveBayes;
@@ -21,6 +23,7 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
     private String ARFF = "src/dataSets/";
     
     private int numAttrib;
+    private int classIndex;
     
     private T technique;
 
@@ -43,7 +46,8 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
             ConverterUtils.DataSource dataSource = new ConverterUtils.DataSource(ARFF);
             registros = dataSource.getDataSet();            
             numAttrib = registros.numAttributes();
-            registros.setClassIndex(0);
+            classIndex = 0;
+            registros.setClassIndex(classIndex);
             
         }catch(Exception e){
             e.printStackTrace();
@@ -65,16 +69,44 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
         }
     }
     
-    public Instance createNewRegister(int AGE, String SEX, String STEROID,
-            String ANTIVIRALS, String FATIGUE, String MALAISE, String ANOREXIA,
-            String LIVER_BIG, String LIVER_FIRM, String SPLEEN_PALPABLE,
-            String SPIDERS, String ASCITES, String VARICES, float BILIRUBIN, float ALK_PHOSPHATE,
-            float SGOT, float ALBUMIN, float PROTIME, String HISTOLOGY,
-            Instances instances){
+    public Instance createNewRegister(List<Object> object, Instances instances){
         Instance registro = new DenseInstance(numAttrib);
         registro.setDataset(instances);
         
-        registro.setValue(1, AGE);
+        for(int i = 0; i < numAttrib-1; i++){
+            if(i != classIndex){
+                String classAux = object.get(i).getClass().toString();
+                
+                System.out.println(classAux);
+                
+                switch (classAux){
+                    case "class java.lang.String":
+                        System.out.println(i + " - " + object.get(i));
+                        registro.setValue(i, ((String) object.get(i)).toString() );
+                        break;
+                
+                    case "class java.lang.Float":
+                        System.out.println(i + " - " + object.get(i));
+                        registro.setValue(i, (float) object.get(i));
+                        break;
+                
+                    case "class java.lang.Integer":
+                        System.out.println(i + " - " + object.get(i));
+                        registro.setValue(i, (Integer) object.get(i));
+                        break;
+                
+                    default:
+                        System.out.println(i + " -d- " + object.get(i));
+                        break;
+                }
+                
+                //registro.setValue(i,  classAux object.get(i) );
+                
+            }
+        }
+        
+        /*
+        registro.setValue(1, object.get(1).getClass().cast(object.get(1)) );
         registro.setValue(2, SEX);
         registro.setValue(3, STEROID);
         registro.setValue(4, ANTIVIRALS);
@@ -93,6 +125,7 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
         registro.setValue(17, ALBUMIN);
         registro.setValue(18, PROTIME);
         registro.setValue(19, HISTOLOGY);
+        */
         
         return registro;
     }

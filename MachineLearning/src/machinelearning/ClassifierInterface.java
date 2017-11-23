@@ -1,6 +1,8 @@
 package machinelearning;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import weka.classifiers.Classifier;
 import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.functions.MultilayerPerceptron;
@@ -51,17 +53,9 @@ public class ClassifierInterface implements Serializable{
         mLC = createInstance(cls, dataSet);
     }
     
-    public String classifier(int AGE, String SEX, String STEROID,
-            String ANTIVIRALS, String FATIGUE, String MALAISE, String ANOREXIA,
-            String LIVER_BIG, String LIVER_FIRM, String SPLEEN_PALPABLE,
-            String SPIDERS, String ASCITES, String VARICES, float BILIRUBIN, float ALK_PHOSPHATE,
-            float SGOT, float ALBUMIN, float PROTIME, String HISTOLOGY){
+    public String classifier(List<Object> object){
         
-        Instance newRegister = mLC.createNewRegister(AGE, SEX, STEROID,
-                                ANTIVIRALS, FATIGUE, MALAISE, ANOREXIA,
-                                LIVER_BIG, LIVER_FIRM, SPLEEN_PALPABLE,
-                                SPIDERS, ASCITES, VARICES, BILIRUBIN,
-                                ALK_PHOSPHATE, SGOT, ALBUMIN, PROTIME, HISTOLOGY, instancesTrain);
+        Instance newRegister = mLC.createNewRegister(object, instancesTrain);
         
         return mLC.prediction(newRegister);
     }
