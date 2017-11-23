@@ -2,7 +2,7 @@
 
 the Data used in this project was found in: http://archive.ics.uci.edu/ml/datasets.html
 
-More information specifically about the used data set may be found in:
+More information specifically about the used dataSet may be found in:
 
 * http://archive.ics.uci.edu/ml/datasets/Hepatitis
 
