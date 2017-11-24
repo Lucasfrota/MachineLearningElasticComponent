@@ -110,28 +110,6 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
                 
         }
         
-        /*
-        registro.setValue(1, object.get(1).getClass().cast(object.get(1)) );
-        registro.setValue(2, SEX);
-        registro.setValue(3, STEROID);
-        registro.setValue(4, ANTIVIRALS);
-        registro.setValue(5, FATIGUE);
-        registro.setValue(6, MALAISE);
-        registro.setValue(7, ANOREXIA);
-        registro.setValue(8, LIVER_BIG);
-        registro.setValue(9, LIVER_FIRM);
-        registro.setValue(10, SPLEEN_PALPABLE);
-        registro.setValue(11, SPIDERS);
-        registro.setValue(12, ASCITES);
-        registro.setValue(13, VARICES);
-        registro.setValue(14, BILIRUBIN);
-        registro.setValue(15, ALK_PHOSPHATE);
-        registro.setValue(16, SGOT);
-        registro.setValue(17, ALBUMIN);
-        registro.setValue(18, PROTIME);
-        registro.setValue(19, HISTOLOGY);
-        */
-        
         return registro;
     }
     
