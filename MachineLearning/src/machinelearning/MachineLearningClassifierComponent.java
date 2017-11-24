@@ -74,29 +74,63 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
         Instance registro = new DenseInstance(numAttrib);
         registro.setDataset(instances);
         
+        int index = 0;
+        int indexObj = 0;
+        
         for(int i = 0; i < numAttrib-1; i++){
-            
-            String classAux = object.get(i).getClass().toString();
+            if(index != classIndex){
                 
-            switch (classAux){
-                case "class java.lang.String":
-                    registro.setValue(i + 1, (String) object.get(i));
-                    break;
+                String classAux = object.get(indexObj).getClass().toString();
+                
+                switch (classAux){
+                    case "class java.lang.String":
+                        System.out.println(index + " -s- " + object.get(indexObj));
+                        registro.setValue(index, (String) object.get(indexObj));
+                        break;
 
-                case "class java.lang.Float":
-                    registro.setValue(i + 1, (float) object.get(i));
-                    break;
+                    case "class java.lang.Float":
+                        System.out.println(index + " -f- " + object.get(indexObj));
+                        registro.setValue(index, (float) object.get(indexObj));
+                        break;
 
-                case "class java.lang.Integer":
-                    registro.setValue(i + 1, (Integer) object.get(i));
-                    break;
+                    case "class java.lang.Integer":
+                        System.out.println(index + " -i- " + object.get(indexObj));
+                        registro.setValue(index, (Integer) object.get(indexObj));
+                        break;
 
-                default:
-                    System.out.println(i + " -d- " + object.get(i));
-                    break;
+                    default:
+                        System.out.println(index + " -d- " + object.get(i));
+                        break;
+                        
+                }
+                indexObj++;
             }
+
+            index++;
                 
         }
+        
+        /*
+        registro.setValue(1, object.get(1).getClass().cast(object.get(1)) );
+        registro.setValue(2, SEX);
+        registro.setValue(3, STEROID);
+        registro.setValue(4, ANTIVIRALS);
+        registro.setValue(5, FATIGUE);
+        registro.setValue(6, MALAISE);
+        registro.setValue(7, ANOREXIA);
+        registro.setValue(8, LIVER_BIG);
+        registro.setValue(9, LIVER_FIRM);
+        registro.setValue(10, SPLEEN_PALPABLE);
+        registro.setValue(11, SPIDERS);
+        registro.setValue(12, ASCITES);
+        registro.setValue(13, VARICES);
+        registro.setValue(14, BILIRUBIN);
+        registro.setValue(15, ALK_PHOSPHATE);
+        registro.setValue(16, SGOT);
+        registro.setValue(17, ALBUMIN);
+        registro.setValue(18, PROTIME);
+        registro.setValue(19, HISTOLOGY);
+        */
         
         return registro;
     }
