@@ -84,17 +84,14 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
                 
                 switch (classAux){
                     case "class java.lang.String":
-                        System.out.println(index + " -s- " + object.get(indexObj));
                         registro.setValue(index, (String) object.get(indexObj));
                         break;
 
                     case "class java.lang.Float":
-                        System.out.println(index + " -f- " + object.get(indexObj));
                         registro.setValue(index, (float) object.get(indexObj));
                         break;
 
                     case "class java.lang.Integer":
-                        System.out.println(index + " -i- " + object.get(indexObj));
                         registro.setValue(index, (Integer) object.get(indexObj));
                         break;
 
