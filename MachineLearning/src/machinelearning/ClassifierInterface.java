@@ -1,5 +1,6 @@
 package machinelearning;
 
+import Exceptions.ParametersException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +54,7 @@ public class ClassifierInterface implements Serializable{
         mLC = createInstance(cls, dataSet);
     }
     
-    public String classifier(List<Object> object){
+    public String classifier(List<Object> object) throws ParametersException{
         
         Instance newRegister = mLC.createNewRegister(object, instancesTrain);
         

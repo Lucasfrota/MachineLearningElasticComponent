@@ -1,5 +1,6 @@
 package machinelearning;
 
+import Exceptions.ParametersException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -70,41 +71,46 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
         }
     }
     
-    public Instance createNewRegister(List<Object> object, Instances instances){
+    public Instance createNewRegister(List<Object> object, Instances instances) throws ParametersException{
         Instance registro = new DenseInstance(numAttrib);
         registro.setDataset(instances);
         
         int index = 0;
         int indexObj = 0;
-        
-        for(int i = 0; i < numAttrib-1; i++){
-            if(index != classIndex){
-                
-                String classAux = object.get(indexObj).getClass().toString();
-                
-                switch (classAux){
-                    case "class java.lang.String":
-                        registro.setValue(index, (String) object.get(indexObj));
-                        break;
 
-                    case "class java.lang.Float":
-                        registro.setValue(index, (float) object.get(indexObj));
-                        break;
+        try{
+            
+            for(int i = 0; i < numAttrib-1; i++){
+                if(index != classIndex){
 
-                    case "class java.lang.Integer":
-                        registro.setValue(index, (Integer) object.get(indexObj));
-                        break;
+                    String classAux = object.get(indexObj).getClass().toString();
 
-                    default:
-                        System.out.println(index + " -d- " + object.get(i));
-                        break;
-                        
+                    switch (classAux){
+                        case "class java.lang.String":
+                            registro.setValue(index, (String) object.get(indexObj));
+                            break;
+
+                        case "class java.lang.Float":
+                            registro.setValue(index, (float) object.get(indexObj));
+                            break;
+
+                        case "class java.lang.Integer":
+                            registro.setValue(index, (Integer) object.get(indexObj));
+                            break;
+
+                        default:
+                            System.out.println(index + " -d- " + object.get(i));
+                            break;
+
+                    }
+                    indexObj++;
                 }
-                indexObj++;
-            }
 
-            index++;
-                
+                index++;
+
+            }
+        }catch(Exception e){
+            throw new ParametersException("");
         }
         
         return registro;
