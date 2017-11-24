@@ -14,6 +14,16 @@ public class MachineLearning {
         
         String clas = cI.classifier(atributos);
         
+        String nameClass = "";
+        
+        if(clas.equals("1")){
+            nameClass = "Die";
+        }else{
+            nameClass = "Live";
+        }
+        
+        System.out.println("Class: " + nameClass);
+        
         
     }
     

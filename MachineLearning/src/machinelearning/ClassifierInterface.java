@@ -79,7 +79,7 @@ public class ClassifierInterface implements Serializable{
         return mLC;
     }
     
-    public void splitDataset(Instances registros, int percent){
+    private void splitDataset(Instances registros, int percent){
         int trainSize = (int) Math.round(registros.numInstances() * percent/100);
         int testSise = registros.numInstances() - trainSize;
         
