@@ -25,12 +25,6 @@ public class ClassifierInterface implements Serializable{
         DECISION_TREE, NAIVEBAYES, KNN, MULTILAYER_PERCEPTRON, SUPPORT_VECTOR_MACHINE;
     }
     
-    ClassifierInterface(Type type){
-        this.type = type;
-        Class cls = getTechnique();
-        mLC = createInstance(cls);
-    }
-    
     ClassifierInterface(Type type, String dataSet){
         this.type = type;
         Class cls = getTechnique();
@@ -41,17 +35,6 @@ public class ClassifierInterface implements Serializable{
         this.type = type;
         Class cls = getTechnique();
         mLC = createInstance(cls, dataSet, classIndex);
-    }
-    
-    private <T extends Classifier> MachineLearningClassifierComponent createInstance(Class<T> cls){
-        
-        MachineLearningClassifierComponent<T> mLC;
-
-        mLC = new MachineLearningClassifierComponent<T>(cls);
-        
-        splitDataset(mLC.getBase(), 70);
-        mLC.learn(instancesTrain);
-        return mLC;
     }
     
     private <T extends Classifier> MachineLearningClassifierComponent createInstance(Class<T> cls, String dataSet){

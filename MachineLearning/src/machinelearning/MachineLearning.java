@@ -11,7 +11,7 @@ public class MachineLearning {
     
     public static void main(String[] args) throws ParametersException, quantityParametersException{
     
-        ClassifierInterface hepatitisClassifier = new ClassifierInterface(ClassifierInterface.Type.NAIVEBAYES, null, 0);
+        ClassifierInterface hepatitisClassifier = new ClassifierInterface(ClassifierInterface.Type.NAIVEBAYES, "HepatitisDataSet", 0);
         String hepatiteClass = hepatitisClassifier.classifier(Arrays.asList(40,"1","1","2","1","2","2","2","1","2","2","2","2",0.60f,62,166,4.0f,63,"1"));
         
         System.out.println("Class hepatite dataSet: " + hepatiteClass);

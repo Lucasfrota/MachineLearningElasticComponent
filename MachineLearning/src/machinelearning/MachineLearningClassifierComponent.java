@@ -24,24 +24,16 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
     private final Class<T> cls;
     
     private String ARFF = "src/dataSets/";
-    private String defaultARFF = "HepatitisDataSet";
     
     private int numAttrib;
     private int classIndex = -1;
     
     private T technique;
-
-    MachineLearningClassifierComponent(Class<T> cls) {
-        this.cls = cls;
-        ARFF += defaultARFF + ".arff";
-    }
     
     MachineLearningClassifierComponent(Class<T> cls, String dataSetPath) {
         this.cls = cls;
         if(dataSetPath != null){
             ARFF += dataSetPath + ".arff";
-        }else{
-            ARFF += defaultARFF + ".arff";
         }
     }
 
@@ -50,8 +42,6 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
         this.classIndex = classIndex;
         if(dataSetPath != null){
             ARFF += dataSetPath + ".arff";
-        }else{
-            ARFF += defaultARFF + ".arff";
         }
     }
     
