@@ -25,10 +25,55 @@ public class ClassifierInterface implements Serializable{
         DECISION_TREE, NAIVEBAYES, KNN, MULTILAYER_PERCEPTRON, SUPPORT_VECTOR_MACHINE;
     }
     
-    ClassifierInterface(Type type, String dataSet, int classIndex){
+    ClassifierInterface(Type type){
+        this.type = type;
+        Class cls = getTechnique();
+        mLC = createInstance(cls);
+    }
+    
+    ClassifierInterface(Type type, String dataSet){
         this.type = type;
         Class cls = getTechnique();
         mLC = createInstance(cls, dataSet);
+    }
+    
+    ClassifierInterface(Type type, String dataSet, int classIndex){
+        this.type = type;
+        Class cls = getTechnique();
+        mLC = createInstance(cls, dataSet, classIndex);
+    }
+    
+    private <T extends Classifier> MachineLearningClassifierComponent createInstance(Class<T> cls){
+        
+        MachineLearningClassifierComponent<T> mLC;
+
+        mLC = new MachineLearningClassifierComponent<T>(cls);
+        
+        splitDataset(mLC.getBase(), 70);
+        mLC.learn(instancesTrain);
+        return mLC;
+    }
+    
+    private <T extends Classifier> MachineLearningClassifierComponent createInstance(Class<T> cls, String dataSet){
+        
+        MachineLearningClassifierComponent<T> mLC;
+
+        mLC = new MachineLearningClassifierComponent<T>(cls, dataSet);
+        
+        splitDataset(mLC.getBase(), 70);
+        mLC.learn(instancesTrain);
+        return mLC;
+    }
+    
+    private <T extends Classifier> MachineLearningClassifierComponent createInstance(Class<T> cls, String dataSet, int classIndex){
+        
+        MachineLearningClassifierComponent<T> mLC;
+
+        mLC = new MachineLearningClassifierComponent<T>(cls, dataSet, classIndex);
+        
+        splitDataset(mLC.getBase(), 70);
+        mLC.learn(instancesTrain);
+        return mLC;
     }
     
     public String classifier(List<Object> object) throws ParametersException, quantityParametersException{
@@ -40,21 +85,6 @@ public class ClassifierInterface implements Serializable{
     
     public double accuracy(){
         return mLC.accuracy(instancesTrain, instancesTest);
-    }
-    
-    private <T extends Classifier> MachineLearningClassifierComponent createInstance(Class<T> cls, String data){
-        
-        MachineLearningClassifierComponent<T> mLC;
-
-        if(data == null){
-            mLC = new MachineLearningClassifierComponent<T>(cls);
-        }else{
-            mLC = new MachineLearningClassifierComponent<T>(cls, data);
-        }
-        
-        splitDataset(mLC.getBase(), 70);
-        mLC.learn(instancesTrain);
-        return mLC;
     }
     
     private void splitDataset(Instances registros, int percent){
