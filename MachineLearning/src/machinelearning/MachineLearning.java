@@ -21,6 +21,14 @@ public class MachineLearning {
         
         System.out.println("Class plants dataSet: " + plantsClass);
         
+        Comparator compHepatitis = new Comparator("HepatitisDataSet", 0);
+        
+        compHepatitis.printBestType();
+        
+        Comparator compPlants = new Comparator("plantas");
+        
+        compPlants.printBestType();
+        
         
     }
     

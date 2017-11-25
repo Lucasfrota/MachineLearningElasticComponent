@@ -3,60 +3,142 @@ package machinelearning;
 
 public class Comparator {
     
-    public ClassifierInterface.Type bestType(String dataSet){
-        
+    private String dataSet = "";
+    private int classIndex = -1;
+
+    public Comparator(String dataSet) {
+        this.dataSet = dataSet;
+    }
+    
+    public Comparator(String dataSet, int classIndex){
+        this.dataSet = dataSet;
+        this.classIndex = classIndex;
+    }
+    
+    public ClassifierInterface.Type bestType(){
         ClassifierInterface.Type bestType = null;
-        double bestAccuracy = 0;
         
-        for(ClassifierInterface.Type type : ClassifierInterface.Type.values()){
-            ClassifierInterface cI = new ClassifierInterface(type, dataSet);
-        
-            double accuracy = cI.accuracy();
+        if(classIndex != -1){
             
-            if(accuracy >= bestAccuracy){
-                bestAccuracy = accuracy;
-                bestType = type;
+            double bestAccuracy = 0;
+
+            for(ClassifierInterface.Type type : ClassifierInterface.Type.values()){
+                ClassifierInterface cI = new ClassifierInterface(type, dataSet);
+
+                double accuracy = cI.accuracy();
+
+                if(accuracy >= bestAccuracy){
+                    bestAccuracy = accuracy;
+                    bestType = type;
+                }
             }
+
+            return bestType;
             
-            System.out.println(type + ": " + accuracy);
+        }else{
+            double bestAccuracy = 0;
+
+            for(ClassifierInterface.Type type : ClassifierInterface.Type.values()){
+                ClassifierInterface cI = new ClassifierInterface(type, dataSet, classIndex);
+
+                double accuracy = cI.accuracy();
+
+                if(accuracy >= bestAccuracy){
+                    bestAccuracy = accuracy;
+                    bestType = type;
+                }
+            }
         }
-        
         return bestType;
     }
     
-    public void dataSetComparator(String dataSet){
+    public void printBestType(){
         String cabecalho = "====" + dataSet + "====";
         System.out.println(cabecalho);
-        bestType(dataSet);
+        innerBestType();
         for (int i = 0; i < cabecalho.length(); i++) {
             System.out.print("=");
         }
         System.out.println("\n");
     }
     
-    public void iteraionsClassifier(String dataSet, int numIt){        
-        String cabecalho = "====" + dataSet + "====";
-        System.out.println(cabecalho);
+    public void printBestTypePerIteration(int numIt){
+        if(classIndex != -1){
+            String cabecalho = "====" + dataSet + "====";
+            System.out.println(cabecalho);
+
+            for(ClassifierInterface.Type type : ClassifierInterface.Type.values()){
+
+                double acumuladorMedia = 0;
+
+                for(int i = 0; i < numIt; i++){ 
+                    ClassifierInterface cI = new ClassifierInterface(type, dataSet);
+                    acumuladorMedia += cI.accuracy();
+                }
+                System.out.println(type + ": " + acumuladorMedia/numIt);
+            }
+
+            for (int i = 0; i < cabecalho.length(); i++) {
+                System.out.print("=");
+            }
+            System.out.println("\n");
+        }else{
+            String cabecalho = "====" + dataSet + "====";
+            System.out.println(cabecalho);
+
+            for(ClassifierInterface.Type type : ClassifierInterface.Type.values()){
+
+                double acumuladorMedia = 0;
+
+                for(int i = 0; i < numIt; i++){ 
+                    ClassifierInterface cI = new ClassifierInterface(type, dataSet, classIndex);
+                    acumuladorMedia += cI.accuracy();
+                }
+                System.out.println(type + ": " + acumuladorMedia/numIt);
+            }
+
+            for (int i = 0; i < cabecalho.length(); i++) {
+                System.out.print("=");
+            }
+            System.out.println("\n");
+        }
+    }
+    
+    private void innerBestType(){
+        ClassifierInterface.Type bestType = null;
         
-        for(ClassifierInterface.Type type : ClassifierInterface.Type.values()){
+        if(classIndex != -1){
             
-            double acumuladorMedia = 0;
-                    
-            for(int i = 0; i < numIt; i++){
-                
+            double bestAccuracy = 0;
+
+            for(ClassifierInterface.Type type : ClassifierInterface.Type.values()){
                 ClassifierInterface cI = new ClassifierInterface(type, dataSet);
-                acumuladorMedia += cI.accuracy();
-                
+
+                double accuracy = cI.accuracy();
+
+                if(accuracy >= bestAccuracy){
+                    bestAccuracy = accuracy;
+                    bestType = type;
+                }
+
+                System.out.println(type + ": " + accuracy);
             }
             
-            System.out.println(type + ": " + acumuladorMedia/numIt);
-            
+        }else{
+            double bestAccuracy = 0;
+
+            for(ClassifierInterface.Type type : ClassifierInterface.Type.values()){
+                ClassifierInterface cI = new ClassifierInterface(type, dataSet, classIndex);
+
+                double accuracy = cI.accuracy();
+
+                if(accuracy >= bestAccuracy){
+                    bestAccuracy = accuracy;
+                    bestType = type;
+                }
+
+                System.out.println(type + ": " + accuracy);
+            }
         }
-        
-        for (int i = 0; i < cabecalho.length(); i++) {
-            System.out.print("=");
-        }
-        System.out.println("\n");
     }
-    
 }

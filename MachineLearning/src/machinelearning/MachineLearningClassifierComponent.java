@@ -44,7 +44,7 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
         }
     }
     
-    public Instances getBase(){
+    public Instances getBase() throws Exception{
         Instances registros = null;
         
         try{
@@ -58,8 +58,7 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
             registros.setClassIndex(classIndex);
             
         }catch(Exception e){
-            e.printStackTrace();
-            System.out.println("the file " + ARFF + " could not be found");
+            throw new ParametersException("the file " + ARFF + " could not be found");
         }
         
         return registros;
