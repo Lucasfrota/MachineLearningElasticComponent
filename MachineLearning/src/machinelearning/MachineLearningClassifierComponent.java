@@ -26,7 +26,7 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
     private String ARFF = "src/dataSets/";
     
     private int numAttrib;
-    private int classIndex;
+    private int classIndex = -1;
     
     private T technique;
 
@@ -35,11 +35,16 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
         ARFF = "src/dataSets/HepatitisDataSet.arff";
     }
     
-    MachineLearningClassifierComponent(Class<T> cls, String dataSet) {
+    MachineLearningClassifierComponent(Class<T> cls, String dataSetPath) {
         this.cls = cls;
-        ARFF += dataSet + ".arff";
+        ARFF += dataSetPath + ".arff";
     }
 
+    MachineLearningClassifierComponent(Class<T> cls, String dataSetPath, int classIndex) {
+        this.cls = cls;
+        this.classIndex = classIndex;
+        ARFF += dataSetPath + ".arff";
+    }
     
     public Instances getBase(){
         Instances registros = null;
@@ -49,7 +54,9 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
             ConverterUtils.DataSource dataSource = new ConverterUtils.DataSource(ARFF);
             registros = dataSource.getDataSet();            
             numAttrib = registros.numAttributes();
-            classIndex = 0;
+            if(classIndex == -1){
+                classIndex = 0;
+            }
             registros.setClassIndex(classIndex);
             
         }catch(Exception e){

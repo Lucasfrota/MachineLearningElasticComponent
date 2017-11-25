@@ -25,33 +25,9 @@ public class ClassifierInterface implements Serializable{
         DECISION_TREE, NAIVEBAYES, KNN, MULTILAYER_PERCEPTRON, SUPPORT_VECTOR_MACHINE;
     }
     
-    ClassifierInterface(Type type, String dataSet){
+    ClassifierInterface(Type type, String dataSet, int classIndex){
         this.type = type;
-        
-        Class cls = null;
-        
-        switch(this.type){
-            case DECISION_TREE:
-                cls = J48.class;
-                break;
-                
-            case NAIVEBAYES:
-                cls = NaiveBayes.class;
-                break;
-
-            case KNN:
-                cls = IBk.class;
-                break;
-                
-            case MULTILAYER_PERCEPTRON:
-                cls = MultilayerPerceptron.class;
-                break;
-                
-            case SUPPORT_VECTOR_MACHINE:
-                cls = SMO.class;
-                break;
-        }
-        
+        Class cls = getTechnique();
         mLC = createInstance(cls, dataSet);
     }
     
@@ -87,6 +63,34 @@ public class ClassifierInterface implements Serializable{
         
         instancesTrain = new Instances(registros, 0, trainSize);
         instancesTest = new Instances(registros, trainSize, testSise);
+    }
+    
+    private Class getTechnique(){
+        Class cls = null;
+        
+        switch(this.type){
+            case DECISION_TREE:
+                cls = J48.class;
+                break;
+                
+            case NAIVEBAYES:
+                cls = NaiveBayes.class;
+                break;
+
+            case KNN:
+                cls = IBk.class;
+                break;
+                
+            case MULTILAYER_PERCEPTRON:
+                cls = MultilayerPerceptron.class;
+                break;
+                
+            case SUPPORT_VECTOR_MACHINE:
+                cls = SMO.class;
+                break;
+        }
+        
+        return cls;
     }
     
 }

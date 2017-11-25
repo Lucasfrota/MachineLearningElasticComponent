@@ -10,9 +10,9 @@ public class MachineLearning {
     
     public static void main(String[] args) throws ParametersException, quantityParametersException{
     
-        ClassifierInterface cI = new ClassifierInterface(ClassifierInterface.Type.NAIVEBAYES, null);
+        ClassifierInterface cI = new ClassifierInterface(ClassifierInterface.Type.NAIVEBAYES, null, 0);
         
-        //List<Object> atributos = Arrays.asList(40,"1","1","2","1","2","2","2","1","2","2","2","2",0.60f,62,166,4.0f,63,"1");
+        
         
         String clas = cI.classifier(Arrays.asList(40,"1","1","2","1","2","2","2","1","2","2","2","2",0.60f,62,166,4.0f,63,"1"));
         
