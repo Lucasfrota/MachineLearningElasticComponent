@@ -1,6 +1,6 @@
 # javaMachineLearning
 
-this project aims to be a easy and reusable way to use supervised machine learning techniques
+this project aims to be an easy and reusable way to use supervised machine learning techniques
 
 the Data used in this project was found in: http://archive.ics.uci.edu/ml/datasets.html
 
