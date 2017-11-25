@@ -1,7 +1,6 @@
 package machinelearning;
 
 import Exceptions.ParametersException;
-import Exceptions.quantityParametersException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,7 +8,7 @@ import java.util.List;
 
 public class MachineLearning {
     
-    public static void main(String[] args) throws ParametersException, quantityParametersException{
+    public static void main(String[] args) throws Exception{
     
         ClassifierInterface hepatitisClassifier = new ClassifierInterface(ClassifierInterface.Type.NAIVEBAYES, "HepatitisDataSet", 0);
         String hepatiteClass = hepatitisClassifier.classifier(Arrays.asList(40,"1","1","2","1","2","2","2","1","2","2","2","2",0.60f,62,166,4.0f,63,"1"));

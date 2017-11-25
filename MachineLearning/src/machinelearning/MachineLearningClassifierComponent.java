@@ -1,7 +1,6 @@
 package machinelearning;
 
 import Exceptions.ParametersException;
-import Exceptions.quantityParametersException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -78,14 +77,14 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
         }
     }
     
-    public Instance createNewRegister(List<Object> object, Instances instances) throws ParametersException, quantityParametersException{
+    public Instance createNewRegister(List<Object> object, Instances instances) throws Exception{
         Instance registro = new DenseInstance(numAttrib);
         registro.setDataset(instances);
         
         checkParameters(object, instances);
         
         if(numAttrib - 1 != object.size()){
-            throw new quantityParametersException(numAttrib - 1, object.size());
+            throw new ParametersException("The length of the inputted vector must be " + (numAttrib - 1)  + ", currently it is " + object.size());
         }
         
         int index = 0;
