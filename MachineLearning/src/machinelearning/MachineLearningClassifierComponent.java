@@ -76,8 +76,10 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
         Instance registro = new DenseInstance(numAttrib);
         registro.setDataset(instances);
         
+        checkParameters(object, instances);
+        
         if(numAttrib - 1 != object.size()){
-                throw new quantityParametersException(numAttrib - 1, object.size());
+            throw new quantityParametersException(numAttrib - 1, object.size());
         }
         
         int index = 0;
@@ -87,33 +89,25 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
             
             for(int i = 0; i < numAttrib-1; i++){
                 if(index != classIndex){
-
+                    
                     String classAux = object.get(indexObj).getClass().toString();
 
                     switch (classAux){
                         case "class java.lang.String":
                             registro.setValue(index, (String) object.get(indexObj));
                             break;
-
                         case "class java.lang.Float":
                             registro.setValue(index, (float) object.get(indexObj));
                             break;
-
                         case "class java.lang.Integer":
                             registro.setValue(index, (Integer) object.get(indexObj));
                             break;
-
-                        default:
-                            System.out.println(index + " -d- " + object.get(i));
-                            break;
-
                     }
                     indexObj++;
                 }
-
                 index++;
-
             }
+            
         }catch(Exception e){
             
         }
@@ -159,6 +153,36 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
         }
         
         return correctlyClassified;
+    }
+    
+    private void checkParameters(List<Object> objects, Instances instances) throws ParametersException{
+        
+        int index = 0;
+        
+        for(int i = 0; i < objects.size() + 1; i++){
+            if(i != classIndex){
+                String classAux = objects.get(index).getClass().toString();
+
+                switch (classAux){
+                    case "class java.lang.String":
+                        if(!instances.attribute(i).isNominal()){
+                            throw new ParametersException("the type of attribute " + index + " is wrong.");
+                        }
+                        break;
+                    case "class java.lang.Float":
+                        if(!instances.attribute(i).isNumeric() ){
+                            throw new ParametersException("the type of attribute " + index + " is wrong.");
+                        }
+                        break;
+                    case "class java.lang.Integer":
+                        if(!instances.attribute(i).isNumeric() ){
+                            throw new ParametersException("the type of attribute " + index + " is wrong.");
+                        }
+                        break;
+                }
+                index++;
+            }
+        }
     }
 
 }

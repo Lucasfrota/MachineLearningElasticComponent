@@ -1,13 +1,14 @@
 package machinelearning;
 
 import Exceptions.ParametersException;
+import Exceptions.quantityParametersException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class MachineLearning {
     
-    public static void main(String[] args) throws ParametersException {
+    public static void main(String[] args) throws ParametersException, quantityParametersException{
     
         ClassifierInterface cI = new ClassifierInterface(ClassifierInterface.Type.NAIVEBAYES, null);
         
