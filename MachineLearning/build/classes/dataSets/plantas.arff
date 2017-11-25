@@ -1,0 +1,37 @@
+@relation plantas
+  
+@attribute altura NUMERIC
+@attribute largura NUMERIC
+@attribute classe {bastao_do_imperador,lirio_da_paz,rafia}
+  
+@data
+11,2,bastao_do_imperador
+40,6.5,bastao_do_imperador
+29.5,5.5,bastao_do_imperador
+31,6,bastao_do_imperador
+23,4.5,bastao_do_imperador
+48.5,9,bastao_do_imperador
+39,9.5,bastao_do_imperador
+34,6,bastao_do_imperador
+25.5,4.5,bastao_do_imperador
+12,2.5,bastao_do_imperador
+20.5,6.5,lirio_da_paz
+15,4,lirio_da_paz
+8.5,2.5,lirio_da_paz
+19.5,6,lirio_da_paz
+9,2.5,lirio_da_paz
+5.5,4.5,lirio_da_paz
+9,2.5,lirio_da_paz
+12,3,lirio_da_paz
+7,2,lirio_da_paz
+10,3,lirio_da_paz
+22,2.5,rafia
+20,2.5,rafia
+22,4,rafia
+20,4.4,rafia
+21,0.5,rafia
+22,2,rafia
+13,2.5,rafia
+18,3.5,rafia
+17,3,rafia
+24,2.5,rafia

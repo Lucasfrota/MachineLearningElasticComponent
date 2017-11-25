@@ -70,7 +70,7 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
             
         }catch(Exception e){
             e.printStackTrace();
-            System.out.println("O arquivo arff " + ARFF + " não existe...");
+            System.out.println("the file " + ARFF + " could not be found");
         }
         
         return registros;
