@@ -13,7 +13,7 @@ import weka.classifiers.trees.J48;
 import weka.core.Instance;
 import weka.core.Instances;
 
-public class ClassifierInterface implements Serializable{
+public class ElasticClassifier implements Serializable{
 
     private Type type;
     private MachineLearningClassifierComponent mLC;
@@ -24,19 +24,19 @@ public class ClassifierInterface implements Serializable{
         DECISION_TREE, NAIVEBAYES, KNN, MULTILAYER_PERCEPTRON, SUPPORT_VECTOR_MACHINE;
     }
     
-    ClassifierInterface(Type type, String dataSet){
+    ElasticClassifier(Type type, String dataSet) throws Exception{
         this.type = type;
         Class cls = getTechnique();
         mLC = createInstance(cls, dataSet);
     }
     
-    ClassifierInterface(Type type, String dataSet, int classIndex){
+    ElasticClassifier(Type type, String dataSet, int classIndex) throws Exception{
         this.type = type;
         Class cls = getTechnique();
         mLC = createInstance(cls, dataSet, classIndex);
     }
     
-    private <T extends Classifier> MachineLearningClassifierComponent createInstance(Class<T> cls, String dataSet){
+    private <T extends Classifier> MachineLearningClassifierComponent createInstance(Class<T> cls, String dataSet) throws Exception{
         
         MachineLearningClassifierComponent<T> mLC;
 
@@ -47,7 +47,7 @@ public class ClassifierInterface implements Serializable{
         return mLC;
     }
     
-    private <T extends Classifier> MachineLearningClassifierComponent createInstance(Class<T> cls, String dataSet, int classIndex){
+    private <T extends Classifier> MachineLearningClassifierComponent createInstance(Class<T> cls, String dataSet, int classIndex) throws Exception{
         
         MachineLearningClassifierComponent<T> mLC;
 

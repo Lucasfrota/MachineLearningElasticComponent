@@ -15,15 +15,15 @@ public class Comparator {
         this.classIndex = classIndex;
     }
     
-    public ClassifierInterface.Type bestType(){
-        ClassifierInterface.Type bestType = null;
+    public ElasticClassifier.Type bestType() throws Exception{
+        ElasticClassifier.Type bestType = null;
         
         if(classIndex != -1){
             
             double bestAccuracy = 0;
 
-            for(ClassifierInterface.Type type : ClassifierInterface.Type.values()){
-                ClassifierInterface cI = new ClassifierInterface(type, dataSet);
+            for(ElasticClassifier.Type type : ElasticClassifier.Type.values()){
+                ElasticClassifier cI = new ElasticClassifier(type, dataSet);
 
                 double accuracy = cI.accuracy();
 
@@ -38,8 +38,8 @@ public class Comparator {
         }else{
             double bestAccuracy = 0;
 
-            for(ClassifierInterface.Type type : ClassifierInterface.Type.values()){
-                ClassifierInterface cI = new ClassifierInterface(type, dataSet, classIndex);
+            for(ElasticClassifier.Type type : ElasticClassifier.Type.values()){
+                ElasticClassifier cI = new ElasticClassifier(type, dataSet, classIndex);
 
                 double accuracy = cI.accuracy();
 
@@ -52,7 +52,7 @@ public class Comparator {
         return bestType;
     }
     
-    public void printBestType(){
+    public void printBestType() throws Exception{
         String cabecalho = "====" + dataSet + "====";
         System.out.println(cabecalho);
         innerBestType();
@@ -62,17 +62,18 @@ public class Comparator {
         System.out.println("\n");
     }
     
-    public void printBestTypePerIteration(int numIt){
+    public void printBestTypePerIteration(int numIt) throws Exception{
         if(classIndex != -1){
             String cabecalho = "====" + dataSet + "====";
             System.out.println(cabecalho);
+            System.out.println("Number of iterations: " + numIt);
 
-            for(ClassifierInterface.Type type : ClassifierInterface.Type.values()){
+            for(ElasticClassifier.Type type : ElasticClassifier.Type.values()){
 
                 double acumuladorMedia = 0;
 
                 for(int i = 0; i < numIt; i++){ 
-                    ClassifierInterface cI = new ClassifierInterface(type, dataSet);
+                    ElasticClassifier cI = new ElasticClassifier(type, dataSet);
                     acumuladorMedia += cI.accuracy();
                 }
                 System.out.println(type + ": " + acumuladorMedia/numIt);
@@ -85,13 +86,14 @@ public class Comparator {
         }else{
             String cabecalho = "====" + dataSet + "====";
             System.out.println(cabecalho);
+            System.out.println("Number of iterations: " + numIt);
 
-            for(ClassifierInterface.Type type : ClassifierInterface.Type.values()){
+            for(ElasticClassifier.Type type : ElasticClassifier.Type.values()){
 
                 double acumuladorMedia = 0;
 
                 for(int i = 0; i < numIt; i++){ 
-                    ClassifierInterface cI = new ClassifierInterface(type, dataSet, classIndex);
+                    ElasticClassifier cI = new ElasticClassifier(type, dataSet, classIndex);
                     acumuladorMedia += cI.accuracy();
                 }
                 System.out.println(type + ": " + acumuladorMedia/numIt);
@@ -104,15 +106,15 @@ public class Comparator {
         }
     }
     
-    private void innerBestType(){
-        ClassifierInterface.Type bestType = null;
+    private void innerBestType() throws Exception{
+        ElasticClassifier.Type bestType = null;
         
         if(classIndex != -1){
             
             double bestAccuracy = 0;
 
-            for(ClassifierInterface.Type type : ClassifierInterface.Type.values()){
-                ClassifierInterface cI = new ClassifierInterface(type, dataSet);
+            for(ElasticClassifier.Type type : ElasticClassifier.Type.values()){
+                ElasticClassifier cI = new ElasticClassifier(type, dataSet);
 
                 double accuracy = cI.accuracy();
 
@@ -127,8 +129,8 @@ public class Comparator {
         }else{
             double bestAccuracy = 0;
 
-            for(ClassifierInterface.Type type : ClassifierInterface.Type.values()){
-                ClassifierInterface cI = new ClassifierInterface(type, dataSet, classIndex);
+            for(ElasticClassifier.Type type : ElasticClassifier.Type.values()){
+                ElasticClassifier cI = new ElasticClassifier(type, dataSet, classIndex);
 
                 double accuracy = cI.accuracy();
 
