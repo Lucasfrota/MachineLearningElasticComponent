@@ -10,6 +10,10 @@ ClassifierInterface hepatitisClassifier = new ClassifierInterface(ClassifierInte
 
 Then if you want to classify a new register to obtain a prediction of its class you'll use the classifier method, its parameter is a List of Objects which has to contain the features of your new register
 
+```
+String hepatiteClass = hepatitisClassifier.classifier(Arrays.asList(40,"1","1","2","1","2","2","2","1","2","2","2","2",0.60f,62,166,4.0f,63,"1"));
+```
+
 ## information about the data
 
 * [More dataSets like this](http://archive.ics.uci.edu/ml/datasets.html) - The Data of HepatitisDataSet bay be found here
