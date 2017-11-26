@@ -2,7 +2,7 @@
 
 This project aims to be an easy and reusable way to use supervised machine learning techniques.
 
-To generate a knowledge model it is required to choose your machine learning technique then you'll have to have an .arff file and specify its path in the constructor method just as the index of the predictive class.
+To generate a knowledge model it is required to choose your machine learning technique then you'll have to have an .arff file and specify its path in the constructor method just as the index of the predictive class( in case of your index is in the last position you don't have to declare it ).
 
 ```
 ClassifierInterface hepatitisClassifier = new ClassifierInterface(ClassifierInterface.Type.NAIVEBAYES, "HepatitisDataSet", 0);
@@ -12,6 +12,12 @@ Then if you want to classify a new register to obtain a prediction of its class 
 
 ```
 String hepatiteClass = hepatitisClassifier.classifier(Arrays.asList(40,"1","1","2","1","2","2","2","1","2","2","2","2",0.60f,62,166,4.0f,63,"1"));
+```
+
+Now you have classified an unknown instance :) to know the given classification just print the result
+
+```
+System.out.println("Class hepatite dataSet: " + hepatiteClass);
 ```
 
 ## information about the data
