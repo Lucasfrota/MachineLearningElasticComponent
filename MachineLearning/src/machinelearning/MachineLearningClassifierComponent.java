@@ -22,7 +22,7 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
     
     private final Class<T> cls;
     
-    private String ARFF = "src/dataSets/";
+    private String ARFF = "src/";
     
     private int numAttrib;
     private int classIndex = -1;
