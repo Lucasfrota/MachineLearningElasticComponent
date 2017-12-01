@@ -17,8 +17,7 @@ public class ElasticClassifier implements Serializable{
 
     private Type type;
     private MachineLearningClassifierComponent mLC;
-    private Instances instancesTrain;
-    private Instances instancesTest;
+    private Instances dataSetInstances;
     
     public enum Type{
         DECISION_TREE, NAIVEBAYES, KNN, MULTILAYER_PERCEPTRON, SUPPORT_VECTOR_MACHINE;
@@ -38,13 +37,13 @@ public class ElasticClassifier implements Serializable{
     
     public String classify(List<Object> object) throws Exception{
         
-        Instance newRegister = mLC.createNewUnclassifiedInstance(object, instancesTrain);
+        Instance newRegister = mLC.createNewUnclassifiedInstance(object, dataSetInstances);
         
         return mLC.predict(newRegister);
     }
     
     public double accuracy(){
-        return mLC.accuracy(instancesTrain, instancesTest);
+        return mLC.accuracy(dataSetInstances);
     }
     
     private <T extends Classifier> MachineLearningClassifierComponent createInstance(Class<T> cls, String dataSet) throws Exception{
@@ -53,8 +52,8 @@ public class ElasticClassifier implements Serializable{
 
         mLC = new MachineLearningClassifierComponent<T>(cls, dataSet);
         
-        splitDataset(mLC.getBase(), 70);
-        mLC.learn(instancesTrain);
+        dataSetInstances = mLC.getBase();
+        mLC.learn(dataSetInstances);
         return mLC;
     }
     
@@ -63,18 +62,10 @@ public class ElasticClassifier implements Serializable{
         MachineLearningClassifierComponent<T> mLC;
 
         mLC = new MachineLearningClassifierComponent<T>(cls, dataSet, classIndex);
-        
-        splitDataset(mLC.getBase(), 70);
-        mLC.learn(instancesTrain);
+                
+        dataSetInstances = mLC.getBase();
+        mLC.learn(dataSetInstances);
         return mLC;
-    }
-    
-    private void splitDataset(Instances registros, int percent){
-        int trainSize = (int) Math.round(registros.numInstances() * percent/100);
-        int testSise = registros.numInstances() - trainSize;
-        
-        instancesTrain = new Instances(registros, 0, trainSize);
-        instancesTest = new Instances(registros, trainSize, testSise);
     }
     
     private Class getTechnique(){

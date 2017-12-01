@@ -29,6 +29,7 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
     
     private T technique;
     
+    //constructor method
     MachineLearningClassifierComponent(Class<T> cls, String dataSetPath) {
         this.cls = cls;
         if(dataSetPath != null){
@@ -44,6 +45,8 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
         }
     }
     
+    
+    //public methods
     public Instances getBase() throws Exception{
         Instances registros = null;
         
@@ -106,19 +109,16 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
         return classeInferida;
     }
     
-    public double accuracy(Instances trainDataset, Instances testDataset){
+    public double accuracy(Instances trainDataset){
         double correctlyClassified = 0;
         
         try{
             
             Evaluation evaluation = new Evaluation(trainDataset);
               
-            evaluation.crossValidateModel(technique, trainDataset, 10, new Random());
-                
-            //evaluation.evaluateModel(technique, testDataset);    
+            evaluation.crossValidateModel(technique, trainDataset, 10, new Random());  
             
             correctlyClassified = evaluation.pctCorrect();
-            //System.out.println(evaluation.toMatrixString());
             
         }catch(Exception e){
             e.printStackTrace();
@@ -128,6 +128,7 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
     }
     
     
+    //private methods
     private void checkParametersTypes(List<Object> featuresList, Instances instances) throws ParametersException{
         
         int index = 0;

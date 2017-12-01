@@ -17,12 +17,14 @@ public class MachineLearning {
         String hepatiteClass = hepatitisClassifier.classify(features);
         
         System.out.println("Class hepatite dataSet: " + hepatiteClass);
+        System.out.println("Accuracy hepatite dataSet: " + hepatitisClassifier.accuracy() + "\n");
         
         
         ElasticClassifier plantsClassifier = new ElasticClassifier(ElasticClassifier.Type.NAIVEBAYES, "dataSets/plantas");
         String plantsClass = plantsClassifier.classify(Arrays.asList(11, 2));
         
         System.out.println("Class plants dataSet: " + plantsClass);
+        System.out.println("Accuracy plants dataSet: " + plantsClassifier.accuracy());
         
     }
     
