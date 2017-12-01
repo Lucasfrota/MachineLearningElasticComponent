@@ -1,4 +1,4 @@
-# javaMachineLearning
+# MachineLearningElasticComponent
 
 This project aims to be an easy and reusable way to use supervised machine learning techniques.
 
