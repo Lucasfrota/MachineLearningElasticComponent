@@ -14,13 +14,13 @@ public class MachineLearning {
         ElasticClassifier hepatitisClassifier = new ElasticClassifier(ElasticClassifier.Type.NAIVEBAYES, "dataSets/HepatitisDataSet", 0);
         
         List<Object> features = Arrays.asList(40,"1","1","2","1","2","2","2","1","2","2","2","2",0.60f,62,166,4.0f,63,"1");
-        String hepatiteClass = hepatitisClassifier.classifier(features);
+        String hepatiteClass = hepatitisClassifier.classify(features);
         
         System.out.println("Class hepatite dataSet: " + hepatiteClass);
         
         
         ElasticClassifier plantsClassifier = new ElasticClassifier(ElasticClassifier.Type.NAIVEBAYES, "dataSets/plantas");
-        String plantsClass = plantsClassifier.classifier(Arrays.asList(11, 2));
+        String plantsClass = plantsClassifier.classify(Arrays.asList(11, 2));
         
         System.out.println("Class plants dataSet: " + plantsClass);
         

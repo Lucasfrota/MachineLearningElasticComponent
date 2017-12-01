@@ -36,6 +36,17 @@ public class ElasticClassifier implements Serializable{
         mLC = createInstance(cls, dataSet, classIndex);
     }
     
+    public String classify(List<Object> object) throws Exception{
+        
+        Instance newRegister = mLC.createNewUnclassifiedInstance(object, instancesTrain);
+        
+        return mLC.predict(newRegister);
+    }
+    
+    public double accuracy(){
+        return mLC.accuracy(instancesTrain, instancesTest);
+    }
+    
     private <T extends Classifier> MachineLearningClassifierComponent createInstance(Class<T> cls, String dataSet) throws Exception{
         
         MachineLearningClassifierComponent<T> mLC;
@@ -56,17 +67,6 @@ public class ElasticClassifier implements Serializable{
         splitDataset(mLC.getBase(), 70);
         mLC.learn(instancesTrain);
         return mLC;
-    }
-    
-    public String classifier(List<Object> object) throws Exception{
-        
-        Instance newRegister = mLC.createNewRegister(object, instancesTrain);
-        
-        return mLC.prediction(newRegister);
-    }
-    
-    public double accuracy(){
-        return mLC.accuracy(instancesTrain, instancesTest);
     }
     
     private void splitDataset(Instances registros, int percent){

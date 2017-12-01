@@ -64,24 +64,22 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
         return registros;
     }
     
-    public void learn(Instances registros){
+    public void learn(Instances instances){
         try{
             
             technique = cls.newInstance();
-            technique.buildClassifier(registros);
-            //System.out.println(technique);
+            technique.buildClassifier(instances);
             
         }catch(Exception e){
             e.printStackTrace();
         }
     }
     
-    public Instance createNewRegister(List<Object> featuresList, Instances instances) throws Exception{
+    public Instance createNewUnclassifiedInstance(List<Object> featuresList, Instances instances) throws Exception{
         Instance instance = new DenseInstance(numAttrib);
         instance.setDataset(instances);
         
         checkParametersTypes(featuresList, instances);
-        
         checkParametersLength(featuresList.size());
         
         instance = setParametersListToInstance(featuresList, instance);
@@ -89,14 +87,14 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
         return instance;
     }
     
-    public String prediction(Instance registroDesconhecido){
+    public String predict(Instance unclassifiedInstance){
         String classeInferida = null;
         
         try{
             
-            int index = Double.valueOf(technique.classifyInstance(registroDesconhecido)).intValue();
+            int index = Double.valueOf(technique.classifyInstance(unclassifiedInstance)).intValue();
             
-            Attribute atributoClasse = registroDesconhecido.classAttribute();
+            Attribute atributoClasse = unclassifiedInstance.classAttribute();
             classeInferida = atributoClasse.value(index);
             
         }catch(Exception e){
@@ -128,6 +126,7 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
         
         return correctlyClassified;
     }
+    
     
     private void checkParametersTypes(List<Object> featuresList, Instances instances) throws ParametersException{
         
