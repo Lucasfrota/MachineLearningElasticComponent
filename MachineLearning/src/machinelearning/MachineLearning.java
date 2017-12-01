@@ -24,7 +24,13 @@ public class MachineLearning {
         String plantsClass = plantsClassifier.classify(Arrays.asList(11, 2));
         
         System.out.println("Class plants dataSet: " + plantsClass);
-        System.out.println("Accuracy plants dataSet: " + plantsClassifier.accuracy());
+        System.out.println("Accuracy plants dataSet: " + plantsClassifier.accuracy() + "\n");
+        
+        ElasticClassifier ticTacToeClassifier = new ElasticClassifier(ElasticClassifier.Type.NAIVEBAYES, "dataSets/tic-tac-toe");
+        String ticTacToeClass = ticTacToeClassifier.classify(Arrays.asList("x","x","x","x","o","o","x","o","o"));
+        
+        System.out.println("Class tic tac toe dataSet: " + ticTacToeClass);
+        System.out.println("Accuracy tic tac toe dataSet: " + ticTacToeClassifier.accuracy());
         
     }
     

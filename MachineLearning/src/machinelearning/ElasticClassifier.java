@@ -35,6 +35,7 @@ public class ElasticClassifier implements Serializable{
         mLC = createInstance(cls, dataSet, classIndex);
     }
     
+    
     public String classify(List<Object> object) throws Exception{
         
         Instance newRegister = mLC.createNewUnclassifiedInstance(object, dataSetInstances);
@@ -45,6 +46,7 @@ public class ElasticClassifier implements Serializable{
     public double accuracy(){
         return mLC.accuracy(dataSetInstances);
     }
+    
     
     private <T extends Classifier> MachineLearningClassifierComponent createInstance(Class<T> cls, String dataSet) throws Exception{
         
