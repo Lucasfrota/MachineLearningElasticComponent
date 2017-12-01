@@ -36,9 +36,9 @@ public class ElasticClassifier implements Serializable{
     }
     
     
-    public String classify(List<Object> object) throws Exception{
+    public String classify(List<Object> features) throws Exception{
         
-        Instance newRegister = mLC.createNewUnclassifiedInstance(object, dataSetInstances);
+        Instance newRegister = mLC.createNewUnclassifiedInstance(features, dataSetInstances);
         
         return mLC.predict(newRegister);
     }

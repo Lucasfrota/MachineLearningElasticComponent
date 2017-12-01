@@ -109,14 +109,14 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
         return classeInferida;
     }
     
-    public double accuracy(Instances trainDataset){
+    public double accuracy(Instances dataset){
         double correctlyClassified = 0;
         
         try{
             
-            Evaluation evaluation = new Evaluation(trainDataset);
+            Evaluation evaluation = new Evaluation(dataset);
               
-            evaluation.crossValidateModel(technique, trainDataset, 10, new Random());  
+            evaluation.crossValidateModel(technique, dataset, 10, new Random());  
             
             correctlyClassified = evaluation.pctCorrect();
             
