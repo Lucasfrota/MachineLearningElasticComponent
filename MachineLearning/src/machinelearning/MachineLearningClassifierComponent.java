@@ -76,47 +76,17 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
         }
     }
     
-    public Instance createNewRegister(List<Object> object, Instances instances) throws Exception{
-        Instance registro = new DenseInstance(numAttrib);
-        registro.setDataset(instances);
+    public Instance createNewRegister(List<Object> featuresList, Instances instances) throws Exception{
+        Instance instance = new DenseInstance(numAttrib);
+        instance.setDataset(instances);
         
-        checkParameters(object, instances);
+        checkParametersTypes(featuresList, instances);
         
-        if(numAttrib - 1 != object.size()){
-            throw new ParametersException("The length of the inputted vector must be " + (numAttrib - 1)  + ", currently it is " + object.size());
-        }
+        checkParametersLength(featuresList.size());
         
-        int index = 0;
-        int indexObj = 0;
-
-        try{
-            
-            for(int i = 0; i < numAttrib-1; i++){
-                if(index != classIndex){
-                    
-                    String classAux = object.get(indexObj).getClass().toString();
-
-                    switch (classAux){
-                        case "class java.lang.String":
-                            registro.setValue(index, (String) object.get(indexObj));
-                            break;
-                        case "class java.lang.Float":
-                            registro.setValue(index, (float) object.get(indexObj));
-                            break;
-                        case "class java.lang.Integer":
-                            registro.setValue(index, (Integer) object.get(indexObj));
-                            break;
-                    }
-                    indexObj++;
-                }
-                index++;
-            }
-            
-        }catch(Exception e){
-            
-        }
+        instance = setParametersListToInstance(featuresList, instance);
         
-        return registro;
+        return instance;
     }
     
     public String prediction(Instance registroDesconhecido){
@@ -159,13 +129,13 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
         return correctlyClassified;
     }
     
-    private void checkParameters(List<Object> objects, Instances instances) throws ParametersException{
+    private void checkParametersTypes(List<Object> featuresList, Instances instances) throws ParametersException{
         
         int index = 0;
         
-        for(int i = 0; i < objects.size() + 1; i++){
+        for(int i = 0; i < featuresList.size() + 1; i++){
             if(i != classIndex){
-                String classAux = objects.get(index).getClass().toString();
+                String classAux = featuresList.get(index).getClass().toString();
 
                 switch (classAux){
                     case "class java.lang.String":
@@ -188,5 +158,45 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
             }
         }
     }
+    
+    private void checkParametersLength(int featuresListSize) throws Exception{
+        if(numAttrib - 1 != featuresListSize){
+            throw new ParametersException("The length of the inputted vector must be " + (numAttrib - 1)  + ", currently it is " + featuresListSize);
+        }
+    }
 
+    private Instance setParametersListToInstance(List<Object> featuresList, Instance instance){
+        
+        int index = 0;
+        int indexObj = 0;
+
+        try{
+            
+            for(int i = 0; i < numAttrib-1; i++){
+                if(index != classIndex){
+                    
+                    String classAux = featuresList.get(indexObj).getClass().toString();
+
+                    switch (classAux){
+                        case "class java.lang.String":
+                            instance.setValue(index, (String) featuresList.get(indexObj));
+                            break;
+                        case "class java.lang.Float":
+                            instance.setValue(index, (float) featuresList.get(indexObj));
+                            break;
+                        case "class java.lang.Integer":
+                            instance.setValue(index, (Integer) featuresList.get(indexObj));
+                            break;
+                    }
+                    indexObj++;
+                }
+                index++;
+            }
+            
+        }catch(Exception e){
+            
+        }
+        
+        return instance;
+    }
 }
