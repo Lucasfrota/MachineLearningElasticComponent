@@ -23,13 +23,13 @@ public class ElasticClassifier implements Serializable{
         DECISION_TREE, NAIVEBAYES, KNN, MULTILAYER_PERCEPTRON, SUPPORT_VECTOR_MACHINE;
     }
     
-    ElasticClassifier(Type type, String dataSet) throws Exception{
+    public ElasticClassifier(Type type, String dataSet) throws Exception{
         this.type = type;
         Class cls = getTechnique();
         mLC = createInstance(cls, dataSet);
     }
     
-    ElasticClassifier(Type type, String dataSet, int classIndex) throws Exception{
+    public ElasticClassifier(Type type, String dataSet, int classIndex) throws Exception{
         this.type = type;
         Class cls = getTechnique();
         mLC = createInstance(cls, dataSet, classIndex);
