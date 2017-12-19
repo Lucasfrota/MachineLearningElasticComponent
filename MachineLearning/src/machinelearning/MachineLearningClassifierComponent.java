@@ -16,6 +16,7 @@ import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils;
+import weka.core.converters.ConverterUtils.DataSource;
 
 
 public class MachineLearningClassifierComponent<T extends Classifier> implements Serializable{
@@ -52,7 +53,7 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
         
         try{
             
-            ConverterUtils.DataSource dataSource = new ConverterUtils.DataSource(ARFF);
+            DataSource dataSource = new ConverterUtils.DataSource(ARFF);
             registros = dataSource.getDataSet();            
             numAttrib = registros.numAttributes();
             if(classIndex == -1){
@@ -134,7 +135,7 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
         int index = 0;
         
         for(int i = 0; i < featuresList.size() + 1; i++){
-            if(i != classIndex){
+            if(i != classIndex && !featuresList.get(index).equals("?")){
                 String classAux = featuresList.get(index).getClass().toString();
 
                 switch (classAux){

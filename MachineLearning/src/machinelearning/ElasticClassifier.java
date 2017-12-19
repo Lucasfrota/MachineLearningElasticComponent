@@ -15,6 +15,7 @@ import weka.core.Instances;
 
 public class ElasticClassifier implements Serializable{
 
+    
     private Type type;
     private MachineLearningClassifierComponent mLC;
     private Instances dataSetInstances;
