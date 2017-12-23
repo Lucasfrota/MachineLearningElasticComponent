@@ -29,7 +29,7 @@ System.out.println("Class hepatite dataSet: " + hepatiteClass);
 
 # How it works
 
-All the used artificial intelligence techniques used in this project was provided by Weka's API version 3.8. More information about weka may be found in [their website](https://www.cs.waikato.ac.nz/ml/weka/)
+All the artificial intelligence techniques used in this project was provided by Weka's API version 3.8. More information about weka may be found in [their website](https://www.cs.waikato.ac.nz/ml/weka/)
 
 # Information about the data
 
