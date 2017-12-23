@@ -27,11 +27,11 @@ Now you have classified an unknown instance :) to know the given classification 
 System.out.println("Class hepatite dataSet: " + hepatiteClass);
 ```
 
-## How it works
+# How it works
 
 All the used artificial intelligence techniques used in this project was provided by Weka's API version 3.8. More information about weka may be found in [their website](https://www.cs.waikato.ac.nz/ml/weka/)
 
-## Information about the data
+# Information about the data
 
 * [Machine learning repository](http://archive.ics.uci.edu/ml/datasets.html) - More dataSets like HepatitisDataSet
 * [Used dataSet](http://archive.ics.uci.edu/ml/datasets/Hepatitis) - More information specifically about the used dataSet
