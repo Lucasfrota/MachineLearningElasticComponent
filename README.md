@@ -4,7 +4,7 @@ This project aims to be an easy and reusable way to use supervised machine learn
 
 # How to use
 
-First of all you'll need to import weka API and MachineLearningElasticComponent API to your project, once those API are inside your project you can access all of its functionalities.
+First of all you'll need to import weka API and MachineLearningElasticComponent API to your project, once those API are inside your project you can access all of its functionalities. some of those functionalities are listed below.
 
 ## classifications
 
