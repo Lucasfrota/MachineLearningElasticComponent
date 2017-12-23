@@ -2,6 +2,12 @@
 
 This project aims to be an easy and reusable way to use supervised machine learning techniques.
 
+# How to use
+
+First of all you'll need to import weka API and MachineLearningElasticComponent API to your project, once those API are inside your project you can access all of its functionalities.
+
+## classifications
+
 To generate a knowledge model it is required to choose your machine learning technique then you'll have to have an .arff file and specify its path in the constructor method just as the index of the predictive class( in case of your index is in the last position you don't have to declare it ).
 
 ```
