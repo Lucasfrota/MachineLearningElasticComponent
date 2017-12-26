@@ -48,6 +48,9 @@ public class ElasticClassifier implements Serializable{
         return mLC.accuracy(dataSetInstances);
     }
     
+    public String getTechniqueType(){
+        return type.toString();
+    }
     
     private <T extends Classifier> MachineLearningClassifierComponent createInstance(Class<T> cls, String dataSet) throws Exception{
         
