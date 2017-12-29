@@ -35,6 +35,14 @@ The comparator component is very useful if you need to compare the accuracy of m
 Comparator comp = new Comparator("dataSets/HepatitisDataSet", 0);
 ```
 
+If you simply want to show the accuracy of each technique use
+
+```
+comp.printBestType();
+```
+
+This command will show that looks like this
+
 # How it works
 
 All the artificial intelligence techniques used in this project was provided by Weka's API version 3.8. More information about weka may be found in [their website](https://www.cs.waikato.ac.nz/ml/weka/)
