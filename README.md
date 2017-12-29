@@ -41,7 +41,7 @@ If you simply want to show the accuracy of each technique use
 comp.printBestType();
 ```
 
-This command will show that looks like this
+This command will show something like this
 
 ![img1](img/comparator_exemple.png)
 
