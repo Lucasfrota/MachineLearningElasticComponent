@@ -43,6 +43,8 @@ comp.printBestType();
 
 This command will show that looks like this
 
+![img1](img/comparator_exemple.png)
+
 # How it works
 
 All the artificial intelligence techniques used in this project was provided by Weka's API version 3.8. More information about weka may be found in [their website](https://www.cs.waikato.ac.nz/ml/weka/)
