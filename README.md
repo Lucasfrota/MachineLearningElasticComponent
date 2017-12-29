@@ -27,6 +27,14 @@ Now you have classified an unknown instance :) to know the given classification 
 System.out.println("Class hepatite dataSet: " + hepatiteClass);
 ```
 
+## Comparator
+
+The comparator component is very useful if you need to compare the accuracy of multiples Techniques give to a specific dataSet. To create a Comparator you'll need first of all to specify the dataset you want to test, as shown below
+
+```
+Comparator comp = new Comparator("dataSets/HepatitisDataSet", 0);
+```
+
 # How it works
 
 All the artificial intelligence techniques used in this project was provided by Weka's API version 3.8. More information about weka may be found in [their website](https://www.cs.waikato.ac.nz/ml/weka/)
