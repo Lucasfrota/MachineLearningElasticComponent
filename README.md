@@ -41,6 +41,12 @@ If you simply want to show the accuracy of each technique use
 comp.printBestType();
 ```
 
+If you need a method that returns the best technique you can use the method bestType()
+
+```
+String bestType = comp.bestType()
+```
+
 This command will show something like this
 
 ![img1](img/comparator_exemple.png)
