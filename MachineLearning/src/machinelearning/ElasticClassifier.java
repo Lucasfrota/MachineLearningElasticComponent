@@ -2,6 +2,7 @@ package machinelearning;
 
 import Exceptions.ParametersException;
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import weka.classifiers.Classifier;
@@ -48,10 +49,23 @@ public class ElasticClassifier implements Serializable{
         return mLC.accuracy(dataSetInstances);
     }
     
+    public String confusionMatrix(String title){
+        return mLC.confusionMatrixString(title);
+    }
+    
+    public String getReliability(int index){
+        DecimalFormat df = new DecimalFormat();
+        df.setMaximumFractionDigits(2);
+        return df.format(mLC.getDistibuition(index) * 100).toString();
+        
+    }
+    
     public String getTechniqueType(){
         return type.toString();
     }
     
+    
+    //Private methods
     private <T extends Classifier> MachineLearningClassifierComponent createInstance(Class<T> cls, String dataSet) throws Exception{
         
         MachineLearningClassifierComponent<T> mLC;

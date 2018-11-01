@@ -143,4 +143,31 @@ public class Comparator {
             }
         }
     }
+    
+    public void printConfusionMatrix() throws Exception{
+        
+        if(classIndex != -1){
+            
+            double bestAccuracy = 0;
+
+            for(ElasticClassifier.Type type : ElasticClassifier.Type.values()){
+                ElasticClassifier cI = new ElasticClassifier(type, dataSet);
+
+                String confusionMatrix = cI.confusionMatrix("Confusion Matrix of: " + type);
+
+                System.out.println(confusionMatrix);
+            }
+            
+        }else{
+            double bestAccuracy = 0;
+
+            for(ElasticClassifier.Type type : ElasticClassifier.Type.values()){
+                ElasticClassifier cI = new ElasticClassifier(type, dataSet, classIndex);
+
+                String confusionMatrix = cI.confusionMatrix("Confusion Matrix of: " + type);
+
+                System.out.println(confusionMatrix);
+            }
+        }
+    }
 }

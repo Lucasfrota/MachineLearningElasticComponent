@@ -28,7 +28,14 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
     private int numAttrib;
     private int classIndex = -1;
     
+    private double distribuition[] = null;
+    
+    private Evaluation evaluation;
+    
     private T technique;
+    
+    private Instances instancesTrain;
+    private Instances instancesTest;
     
     //constructor method
     MachineLearningClassifierComponent(Class<T> cls, String dataSetPath) {
@@ -71,8 +78,14 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
     public void learn(Instances instances){
         try{
             
+            splitDataset(instances, 70);
+            
             technique = cls.newInstance();
-            technique.buildClassifier(instances);
+            technique.buildClassifier(instancesTrain);
+            
+            evaluation = new Evaluation(instancesTrain);//dataset);
+            evaluation.evaluateModel(technique, instancesTest);
+            //evaluation //.crossValidateModel(technique, instances, 10, new Random());
             
         }catch(Exception e){
             e.printStackTrace();
@@ -98,7 +111,10 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
             
             int index = Double.valueOf(technique.classifyInstance(unclassifiedInstance)).intValue();
             
+            this.distribuition = technique.distributionForInstance(unclassifiedInstance);
+            
             Attribute atributoClasse = unclassifiedInstance.classAttribute();
+            
             classeInferida = atributoClasse.value(index);
             
         }catch(Exception e){
@@ -110,17 +126,31 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
         return classeInferida;
     }
     
+    public double getDistibuition(int index){
+        return this.distribuition[index];
+        
+    }
+    
     public double accuracy(Instances dataset){
+        
         double correctlyClassified = 0;
         
         try{
-            
-            Evaluation evaluation = new Evaluation(dataset);
-              
-            evaluation.crossValidateModel(technique, dataset, 10, new Random());  
-            
             correctlyClassified = evaluation.pctCorrect();
+            System.out.println("\nRecall");
             
+            System.out.println(evaluation.recall(0));
+            System.out.println(evaluation.recall(1));
+            System.out.println(evaluation.recall(2));
+            System.out.println("\nprecision");
+            System.out.println(evaluation.precision(0));
+            System.out.println(evaluation.precision(1));
+            System.out.println(evaluation.precision(2));
+            System.out.println("\nF1 score");
+            System.out.println( 2 * evaluation.precision(0) * evaluation.recall(0)/ (evaluation.precision(0) + evaluation.recall(0)) );
+            System.out.println( 2 * evaluation.precision(1) * evaluation.recall(1)/ (evaluation.precision(1) + evaluation.recall(1)) );
+            System.out.println( 2 * evaluation.precision(2) * evaluation.recall(2)/ (evaluation.precision(2) + evaluation.recall(2)) );
+            System.out.println("");
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -128,6 +158,19 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
         return correctlyClassified;
     }
     
+    public String confusionMatrixString(String title){
+        
+        String matrix = "";
+        
+        try{
+            matrix = evaluation.toMatrixString(title) ;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return matrix;
+    }
+        
     
     //private methods
     private void checkParametersTypes(List<Object> featuresList, Instances instances) throws ParametersException{
@@ -199,5 +242,13 @@ public class MachineLearningClassifierComponent<T extends Classifier> implements
         }
         
         return instance;
+    }
+    
+    private void splitDataset(Instances registros, int percent){
+        int trainSize = (int) Math.round(registros.numInstances() * percent/100);
+        int testSise = registros.numInstances() - trainSize;
+        
+        instancesTrain = new Instances(registros, 0, trainSize);
+        instancesTest = new Instances(registros, trainSize, testSise);
     }
 }
