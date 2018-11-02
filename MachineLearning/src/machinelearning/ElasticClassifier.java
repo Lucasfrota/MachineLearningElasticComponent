@@ -16,7 +16,6 @@ import weka.core.Instances;
 
 public class ElasticClassifier implements Serializable{
 
-    
     private Type type;
     private MachineLearningClassifierComponent mLC;
     private Instances dataSetInstances;
@@ -51,6 +50,10 @@ public class ElasticClassifier implements Serializable{
     
     public String confusionMatrix(String title){
         return mLC.confusionMatrixString(title);
+    }
+    
+    public String confusionMatrix(){
+        return mLC.confusionMatrixString("Confusion Matrix");
     }
     
     public String getReliability(int index){
