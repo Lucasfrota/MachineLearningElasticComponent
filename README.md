@@ -59,6 +59,8 @@ Serializer<ElasticClassifier> serializer = new Serializer<ElasticClassifier>();
 serializer.SerializeObject(iris, "iris.model");
 ```
 
+Now you just need to use this file on your Android Studio project as shown [here](https://github.com/Lucasfrota/AndroidMLModelDeserializer)
+
 # How it works
 
 All the artificial intelligence techniques used in this project was provided by Weka's API version 3.8. More information about weka may be found in [their website](https://www.cs.waikato.ac.nz/ml/weka/)
